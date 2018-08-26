@@ -11,7 +11,8 @@ public class Executor02 {
         for ( int count = 0; count < 25; count++ ) {
             workingJack.submit( () -> {
                 // Det er en rød opgave at forklare hvad denne fejl skyldes
-                System.out.println( "Hello "+ count + " to us" );
+                // Fjern udkommenteringen i næste linje
+                //System.out.println( "Hello "+ count + " to us" );
             } );
         }
         workingJack.shutdown();
