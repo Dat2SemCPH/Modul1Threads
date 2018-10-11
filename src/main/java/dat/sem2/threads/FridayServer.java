@@ -26,20 +26,20 @@ public class FridayServer {
         ExecutorService workers = Executors.newFixedThreadPool( 3 );
         while ( true ) { // keep listening (as is normal for a server)
             Socket socket = server.accept();
-            workers.submit(new Runnable() {
+            workers.submit( new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        MyFileReader( socket, root );
+                        myFileReader( socket, root );
                     } catch ( IOException ex ) {
                         System.out.println( "We got an error: " + ex.getMessage() );
                     }
                 }
-            });
+            } );
         }
     }
 
-    private static void MyFileReader( Socket socket, String root ) throws IOException {
+    private static void myFileReader( Socket socket, String root ) throws IOException {
         try {
             System.out.println( "-----------------" );
             HttpRequest req = new HttpRequest( socket.getInputStream() );
@@ -72,7 +72,7 @@ public class FridayServer {
         while ( true ) { // keep listening (as is normal for a server)
             Socket socket = server.accept();
             System.out.println( "---- reqno: " + count + " ----" );
-                workingJack.submit(new Runnable() {
+            workingJack.submit( new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -81,7 +81,7 @@ public class FridayServer {
                         System.out.println( "We got an error: " + ex.getMessage() );
                     }
                 }
-            });
+            } );
             count++;
         }
     }
@@ -90,7 +90,7 @@ public class FridayServer {
         HttpRequest req = new HttpRequest( socket.getInputStream() );
         String path = req.getPath();
         if ( path.endsWith( ".html" ) || path.endsWith( ".txt" ) ) {
-            workingJack.submit(new Runnable() {
+            workingJack.submit( new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -99,9 +99,9 @@ public class FridayServer {
                         System.out.println( "We got an error: " + ex.getMessage() );
                     }
                 }
-            });
+            } );
         } else {
-            workingJack.submit(new Runnable() {
+            workingJack.submit( new Runnable() {
                 @Override
                 public void run() {
                     try {
@@ -110,7 +110,7 @@ public class FridayServer {
                         System.out.println( "We got an error: " + ex.getMessage() );
                     }
                 }
-            });
+            } );
         }
     }
 
@@ -175,5 +175,3 @@ public class FridayServer {
             + "</html>\n";
 
 }
-
-
